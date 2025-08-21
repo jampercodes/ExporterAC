@@ -1,2 +1,7 @@
 
+.vs/
+
+x64/
+Debug/
+
 AutomationExportExample/AutomationExportExample/AutomationExportExample.vcxproj.user
