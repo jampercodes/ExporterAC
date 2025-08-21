@@ -4,5 +4,5 @@
 > This is still a havy work in progas use at your own risk.
 > Please make an issue if you encounter bugs.
 
-## atomation exporter to actto corsa 
- 
+## build proces
+you need to open the .sln file and build an x64 and x86 version.
