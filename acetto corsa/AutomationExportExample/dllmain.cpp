@@ -69,7 +69,7 @@ AuCarExpErrorCode AuCarExportDLL::GetExporterName(AuCarExpArray<wchar_t>& name, 
 	else
 	{
 		//default to English
-		wcscpy_s(name.GetData(), name.GetCount(), L"Export plugin example");
+		wcscpy_s(name.GetData(), name.GetCount(), L"Export plugin AC");
 	}
 
 	return AuCarExpErrorCode_Success;
@@ -79,7 +79,7 @@ AuCarExpErrorCode AuCarExportDLL::GetExporterName(AuCarExpArray<wchar_t>& name, 
 //This is for display in the UI only (to help when users report bugs, etc.). Automation does nothing else with this information.
 AuCarExpErrorCode AuCarExportDLL::GetExporterVersion(unsigned int* VersionNumber)
 {
-	*VersionNumber = 0;
+	*VersionNumber = 1;
 
 	return AuCarExpErrorCode_Success;
 }
