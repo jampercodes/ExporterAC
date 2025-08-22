@@ -271,9 +271,16 @@ AuCarExpErrorCode  AuCarExportDLL::AddWheelPair(const AuCarExpWheelData& wheelDa
 //Export the chassis meshes
 AuCarExpErrorCode  AuCarExportDLL::AddChassis(const AuCarExpArray<AuCarExpMesh*>& meshes)
 {
+	/*
 	for (unsigned int i = 0; i < meshes.GetCount(); i++)
 	{
 		AuExpManager::Instance()->SaveMesh(meshes[i], L"chassis");
+	}
+	*/
+
+	if (meshes.GetCount() != 0)
+	{
+		AuExpManager::Instance()->SaveMeshs(meshes, L"chassis");
 	}
 
 	return AuCarExpErrorCode_Success;

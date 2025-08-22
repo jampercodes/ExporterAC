@@ -11,4 +11,6 @@ class AuExpMesh
 public:
 
 	static void SaveMeshFile(const AuCarExpMesh* mesh, const wchar_t* filename);
+
+	static void SaveMeshsFile(AuCarExpArray<AuCarExpMesh*>& meshes, int mesh_count, const wchar_t* filename);
 };
