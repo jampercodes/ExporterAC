@@ -22,6 +22,9 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
+    <ClCompile Include="FBX.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\AuCarExport.h">
@@ -52,6 +55,9 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="FBX.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>
