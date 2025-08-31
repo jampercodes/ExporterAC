@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="AutomationExportExample.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="DDSHeader.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportManager.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="FBX.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Include\AuCarExport.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\AuCarExportDLL.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AutomationExportExample.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DDSHeader.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportManager.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource2.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="FBX.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AutomationExportExample.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExportExample.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="headers">
+      <UniqueIdentifier>{a731c0f9-7fb2-4dbc-857a-e3d87e54cd7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp">
+      <UniqueIdentifier>{2de06d43-2aba-441b-b688-8733f2c285a3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
