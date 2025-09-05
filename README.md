@@ -9,13 +9,13 @@ You need to have python and Visual Studio 17 2022 c++ compiler installd
 
 Run build.py
 
-And in build/out you shud have: 
-AcettoCorsax64.dll,
-AcettoCorsax64.exp,
-AcettoCorsax64.lib and 
+And in build/out you shud have: \
+AcettoCorsax64.dll, \
+AcettoCorsax64.exp, \
+AcettoCorsax64.lib and \
 AcettoCorsax86.lib
 
-copy those 4 files to: 
+copy those 4 files to: \
 [your_steam_lib]\Automation\UE427\AutomationGame\Content\ExportPlugins
 
 ## to do
