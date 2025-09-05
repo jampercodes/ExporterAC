@@ -5,16 +5,18 @@
 > Please make an issue if you encounter bugs.
 
 ## build proces
-you need to open the .sln file and build an x64 and x86 version.
+You need to have python and Visual Studio 17 2022 c++ compiler installd
 
-you need to add x64 to the x64 copild lib's
-and x86 to the .dll
+Run build.py
 
-> [!NOTE]
-> you shut have AutomationExportExamplex64.dll, AutomationExportExamplex64.exp, AutomationExportExamplex64.lib and AutomationExportExamplex86.lib
-> you can egnore all other files
+And in build/out you shud have: 
+AcettoCorsax64.dll,
+AcettoCorsax64.exp,
+AcettoCorsax64.lib and 
+AcettoCorsax86.lib
 
-copy those 4 files to [your_steam_lib]\Automation\UE427\AutomationGame\Content\ExportPlugins
+copy those 4 files to: 
+[your_steam_lib]\Automation\UE427\AutomationGame\Content\ExportPlugins
 
 ## to do
 <details open>
