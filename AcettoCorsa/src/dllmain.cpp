@@ -6,7 +6,7 @@
 
 #include "stdafx.h"
 
-#include "..\Include\AuCarExportDLL.h"
+#include "AuCarExportDLL.h"
 
 
 
@@ -79,7 +79,9 @@ AuCarExpErrorCode AuCarExportDLL::GetExporterName(AuCarExpArray<wchar_t>& name, 
 //This is for display in the UI only (to help when users report bugs, etc.). Automation does nothing else with this information.
 AuCarExpErrorCode AuCarExportDLL::GetExporterVersion(unsigned int* VersionNumber)
 {
-	*VersionNumber = 1;
+	// big_version, small_version, build_version
+	//   ***1           000             0
+	*VersionNumber = 10011;
 
 	return AuCarExpErrorCode_Success;
 }
