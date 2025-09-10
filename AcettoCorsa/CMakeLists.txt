@@ -3,7 +3,10 @@ project(AcettoCorsa LANGUAGES CXX)
 
 set(BEASE_NAME AcettoCorsa)
 
-file(GLOB header_files include/*.h)
+# dose this work?
+#file(GLOB header_files include/*.h)
+#file(GLOB Lib_header lib_include/*.h)
+
 file(GLOB src_files src/*.cpp)
 
 if(NOT DEFINED LIB_TYPE)
@@ -22,6 +25,10 @@ endif()
 add_library(${BEASE_NAME} ${LIB_TYPE} ${src_files})
 
 target_include_directories(${BEASE_NAME} PRIVATE include)
+
+target_include_directories(${BEASE_NAME} PRIVATE lib_include)
+
+target_link_libraries(${BEASE_NAME} PRIVATE lib/fbx/${target_architecture}/*)
 
 target_compile_definitions(${BEASE_NAME} PRIVATE
     UNICODE

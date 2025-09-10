@@ -2,7 +2,5 @@
 .vs/
 .vscode/
 
-x64/
-Debug/
 build/
 

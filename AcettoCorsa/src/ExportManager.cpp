@@ -156,6 +156,7 @@ void AuExpManager::SaveMeshs(const AuCarExpArray<AuCarExpMesh*>& meshes, const w
        m_MeshNameCounts[name] = 0;  
    }  
 
+   // to change !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    filename += L".obj";  
 
    // Create a non-const copy of the meshes array to pass to SaveMeshsFile  
