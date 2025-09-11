@@ -131,38 +131,17 @@ void AuExpManager::SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name)
 	AuExpMesh::SaveMeshFile(mesh, filename.c_str());
 }
 
-void AuExpManager::SaveMeshs(const AuCarExpArray<AuCarExpMesh*>& meshes, const wchar_t* name)  
+void AuExpManager::SaveMeshFBX(const AuCarExpArray<AuCarExpMesh*>& meshes, const wchar_t* name)  
 {  
    if (meshes.GetCount() == 0)  
    {  
        return;  
    }  
 
-   std::wstring filename = m_ExportDirectory + L"\\";  
-   filename += name;  
-
-   if (m_MeshNameCounts.find(name) != m_MeshNameCounts.end())  
-   {  
-       m_MeshNameCounts[name]++;  
-
-       wchar_t buf[16];  
-       _itow_s(m_MeshNameCounts[name], buf, 10);  
-
-       filename += L"_";  
-       filename += buf;  
-   }  
-   else  
-   {  
-       m_MeshNameCounts[name] = 0;  
-   }  
-
-   // to change !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   filename += L".obj";  
-
    // Create a non-const copy of the meshes array to pass to SaveMeshsFile  
    AuCarExpArray<AuCarExpMesh*> nonConstMeshes(const_cast<AuCarExpMesh**>(meshes.GetData()), meshes.GetCount());  
 
-   AuExpMesh::SaveMeshsFile(nonConstMeshes, nonConstMeshes.GetCount(), filename.c_str());  
+   M_fbx::SaveMeshsFBX(nonConstMeshes, nonConstMeshes.GetCount(), filename.c_str());  
 }
 
 AuCarExpErrorCode AuExpManager::GetExportDirectory(std::wstring& ExportDirectory) const

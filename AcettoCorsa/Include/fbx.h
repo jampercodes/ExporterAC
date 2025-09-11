@@ -1,20 +1,21 @@
 #include <unordered_map>
 #include <string>
 
-fbxMenager fbx;
-
-void setup_fbx(std::string);
+fbxMenager setup_fbx(std::string);
 
 enum part_type
 {
     Chassi,
-    wheel
+    wheel,
+    engene,
+    exhaust,
+    fixture
 };
 
 class fbxMenager
 {
 public:
-    void add_mesh(part_type PartType);
+    void SaveMeshsFBX(AuCarExpArray<AuCarExpMesh*>& meshes, int mesh_count, const wchar_t* filename);
 
     void save_fbx();
 };

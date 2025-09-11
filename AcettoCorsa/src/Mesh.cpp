@@ -66,7 +66,7 @@ void AuExpMesh::SaveMeshFile(const AuCarExpMesh* mesh, const wchar_t* filename)
 	}
 }
 
-void AuExpMesh::SaveMeshsFile(AuCarExpArray<AuCarExpMesh*>& meshes, int mesh_count, const wchar_t* filename)
+void AuExpMesh::SaveFBXFile(AuCarExpArray<AuCarExpMesh*>& meshes, int mesh_count, const wchar_t* filename)
 {
 
 	FILE* file = nullptr;

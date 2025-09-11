@@ -6,3 +6,5 @@
 #include <string>
 #include <codecvt>
 #include <locale>
+
+fbxMenager M_fbx;

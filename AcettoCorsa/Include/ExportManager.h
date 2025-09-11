@@ -24,7 +24,7 @@ public:
 	void SaveImages();
 
 	void SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name);
-	void SaveMeshs(const AuCarExpArray<AuCarExpMesh*>& meshes, const wchar_t* name);
+	void SaveMeshFBX(const AuCarExpMesh* mesh, const wchar_t* name);
 
 	AuCarExpErrorCode GetExportDirectory(std::wstring& ExportDirectory) const;
 

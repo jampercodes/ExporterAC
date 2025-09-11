@@ -8,4 +8,6 @@
 #include <vector>
 #include <map>
 
+#include "dllmain.h"
+
 #include "..\Include\AuCarExport.h"
