@@ -22,13 +22,22 @@ elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
     set(target_architecture "x86")
 endif()
 
+if(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    set(FBXSDK_LIB "${CMAKE_SOURCE_DIR}/lib/fbx/x86/libfbxsdk.lib")
+else()
+    set(FBXSDK_LIB "${CMAKE_SOURCE_DIR}/lib/fbx/x64/libfbxsdk.lib")
+endif()
+
+link_directories(${BEASE_NAME} ${FBXSDK_LIB})
+
 add_library(${BEASE_NAME} ${LIB_TYPE} ${src_files})
 
 target_include_directories(${BEASE_NAME} PRIVATE include)
 
 target_include_directories(${BEASE_NAME} PRIVATE lib_include)
 
-target_link_libraries(${BEASE_NAME} PRIVATE lib/fbx/${target_architecture}/*)
+target_compile_definitions(${BEASE_NAME} PRIVATE FBXSDK_ENV_WIN FBXSDK_COMPILER_MSC FBXSDK_NEW_API)
+
 
 target_compile_definitions(${BEASE_NAME} PRIVATE
     UNICODE

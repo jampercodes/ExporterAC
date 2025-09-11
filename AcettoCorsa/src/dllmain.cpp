@@ -3,10 +3,7 @@
 ** All Rights Reserved
 ************************************************** */
 
-
-#include "stdafx.h"
-
-#include "AuCarExportDLL.h"
+#include "dllmain.h"
 
 
 
@@ -167,8 +164,18 @@ AuCarExpErrorCode AuCarExportDLL::BeginExport(const AuCarExpCarData* carData, Au
 	AuExpManager::Instance()->GetExportDirectory(ExportDirectory);
 
 	wcscpy_s(retDir.GetData(), retDir.GetCount(), ExportDirectory.c_str());
-	
+/*
+	//ugly ai code to get a string!
+#pragma region
+	std::wstring wideStr(carData->GetCarName());
 
+	// Convert to UTF-8 std::string
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
+	std::string result = conv.to_bytes(wideStr);
+#pragma endregion
+
+	setup_fbx(result);
+*/
 	//set the flags to none:
 	*retFlags = AuCarExpExporterFlags_None;
 

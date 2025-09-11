@@ -4,9 +4,9 @@ import subprocess
 
 project_dir = os.path.abspath(os.path.dirname(__file__))
 source_dir = os.path.join(project_dir, ".")
-build_dir_x86 = os.path.join(project_dir, "build/build_x86")
-build_dir_x64 = os.path.join(project_dir, "build/build_x64")
-out_dir = os.path.join(project_dir, "build/out")
+build_dir_x86 = os.path.join(project_dir, "build\\build_x86")
+build_dir_x64 = os.path.join(project_dir, "build\\build_x64")
+out_dir = os.path.join(project_dir, "build\\out")
 
 def run_cmake(build_dir, arch):
     if not os.path.exists(build_dir):
@@ -57,5 +57,6 @@ def copy_outputs():
 if __name__ == "__main__":
     run_cmake(build_dir_x86, "x86")
     run_cmake(build_dir_x64, "x64")
+
     copy_outputs()
     print("Builds completed for x86 and x64. Outputs copied to build/out.")
