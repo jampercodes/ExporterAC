@@ -15,11 +15,11 @@ endif()
 
 message(STATUS "Target pointer size: ${CMAKE_SIZEOF_VOID_P}")
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    message(STATUS "Building for x64")
-    set(target_architecture "x64")
-elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
     message(STATUS "Building for x86")
     set(target_architecture "x86")
+else()
+    message(STATUS "Building for x64")
+    set(target_architecture "x64")
 endif()
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 4)
@@ -28,11 +28,14 @@ else()
     set(FBXSDK_LIB "${CMAKE_SOURCE_DIR}/lib/fbx/x64/libfbxsdk.lib")
 endif()
 
-link_directories(${BEASE_NAME} ${FBXSDK_LIB})
+
 
 add_library(${BEASE_NAME} ${LIB_TYPE} ${src_files})
 
-target_include_directories(${BEASE_NAME} PRIVATE include)
+
+link_directories(${BEASE_NAME} ${FBXSDK_LIB})
+
+target_include_directories(${BEASE_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/Include)
 
 target_include_directories(${BEASE_NAME} PRIVATE lib_include)
 

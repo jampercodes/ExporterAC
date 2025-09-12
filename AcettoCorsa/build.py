@@ -1,26 +1,43 @@
 import os
 import shutil
 import subprocess
+import sys
+
 
 project_dir = os.path.abspath(os.path.dirname(__file__))
 source_dir = os.path.join(project_dir, ".")
-build_dir_x86 = os.path.join(project_dir, "build\\build_x86")
-build_dir_x64 = os.path.join(project_dir, "build\\build_x64")
-out_dir = os.path.join(project_dir, "build\\out")
+build_dir_x86 = os.path.join(project_dir, "build/build_x86")
+build_dir_x64 = os.path.join(project_dir, "build/build_x64")
+out_dir = os.path.join(project_dir, "build/out")
 
 def run_cmake(build_dir, arch):
     if not os.path.exists(build_dir):
         os.makedirs(build_dir)
-    generator = "Visual Studio 17 2022"
-    platform = "Win32" if arch == "x86" else "x64"
-    cmake_cmd = [
-        "cmake",
-        "-S", source_dir,
-        "-B", build_dir,
-        "-G", generator,
-        "-A", platform,
-        f"-DLIB_TYPE=SHARED"
-    ]
+    
+    if(sys.platform == "linux"):
+        generator = "x86_64-w64-mingw32-gcc"
+        platform = "x86" if arch != "x86" else "x64"
+
+        cmake_cmd = [
+            "cmake",
+            "-S", source_dir,
+            "-B", build_dir,
+            "-DLIB_TYPE=SHARED"
+        ]
+    else:
+        generator = "Visual Studio 17 2022"
+        platform = "Win32" if arch == "x86" else "x64"
+
+        cmake_cmd = [
+            "cmake",
+            "-S", source_dir,
+            "-B", build_dir,
+            "-G", generator,
+            "-A", platform,
+            f"-DLIB_TYPE=SHARED"
+        ]
+
+    
     print(f"Configuring {arch}...")
     subprocess.run(cmake_cmd, check=True)
     print(f"Building {arch}...")
