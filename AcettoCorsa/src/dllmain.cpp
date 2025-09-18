@@ -141,7 +141,7 @@ AuCarExpErrorCode AuCarExportDLL::GetRequiredBoolData(AuCarExpArray<AuCarExpUIBo
 	}
 
 	// set the value:
-	wcscpy_s(boolData[0].Label, L"Question?"); // label
+	wcscpy_s(boolData[0].Label, L"export to fbx?"); // label
 	boolData[0].Value = false;				   // default value
 
 	return AuCarExpErrorCode_Success;
@@ -275,16 +275,10 @@ AuCarExpErrorCode AuCarExportDLL::AddWheelPair(const AuCarExpWheelData &wheelDat
 // Export the chassis meshes
 AuCarExpErrorCode AuCarExportDLL::AddChassis(const AuCarExpArray<AuCarExpMesh *> &meshes)
 {
-	/*
+	
 	for (unsigned int i = 0; i < meshes.GetCount(); i++)
 	{
 		AuExpManager::Instance()->SaveMesh(meshes[i], L"chassis");
-	}
-	*/
-
-	if (meshes.GetCount() != 0)
-	{
-		AuExpManager::Instance()->SaveMeshFBX(meshes, L"chassis");
 	}
 
 	return AuCarExpErrorCode_Success;

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(AcettoCorsa LANGUAGES CXX)
 
-set(BEASE_NAME AcettoCorsa)
+set(BASE_NAME AcettoCorsa)
 
 # dose this work?
 #file(GLOB header_files include/*.h)
@@ -22,36 +22,40 @@ else()
     set(target_architecture "x64")
 endif()
 
-if(CMAKE_SIZEOF_VOID_P EQUAL 4)
-    set(FBXSDK_LIB "${CMAKE_SOURCE_DIR}/lib/fbx/x86/libfbxsdk.lib")
-else()
-    set(FBXSDK_LIB "${CMAKE_SOURCE_DIR}/lib/fbx/x64/libfbxsdk.lib")
-endif()
 
 
 
-add_library(${BEASE_NAME} ${LIB_TYPE} ${src_files})
+add_library(${BASE_NAME} ${LIB_TYPE} ${src_files})
 
 
-link_directories(${BEASE_NAME} ${FBXSDK_LIB})
+target_include_directories(${BASE_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/Include)
 
-target_include_directories(${BEASE_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/Include)
+target_include_directories(${BASE_NAME} PRIVATE lib_include)
 
-target_include_directories(${BEASE_NAME} PRIVATE lib_include)
+#target_compile_definitions(${BASE_NAME} PRIVATE FBXSDK_ENV_WIN FBXSDK_COMPILER_MSC FBXSDK_NEW_API)
 
-target_compile_definitions(${BEASE_NAME} PRIVATE FBXSDK_ENV_WIN FBXSDK_COMPILER_MSC FBXSDK_NEW_API)
-
-
-target_compile_definitions(${BEASE_NAME} PRIVATE
+target_compile_definitions(${BASE_NAME} PRIVATE
     UNICODE
     _UNICODE
     _WINDOWS
     _USRDLL
     AUTOMATIONEXPORTEXAMPLE_EXPORTS
-    PROJECT_FILENAME=L"${BEASE_NAME}${target_architecture}.dll"
+    PROJECT_FILENAME=L"${BASE_NAME}${target_architecture}.dll"
 )
 
 
-set_target_properties(${BEASE_NAME} PROPERTIES
-    OUTPUT_NAME "${BEASE_NAME}${target_architecture}"
+set_target_properties(${BASE_NAME} PROPERTIES
+    OUTPUT_NAME "${BASE_NAME}${target_architecture}"
+)
+
+# Add common definitions, including the required Windows version macro
+target_compile_definitions(${BASE_NAME} PRIVATE
+    _WIN32_WINNT=0x0A00 # Required for SDKDDKVer.h
+    FBXSDK_ENV_WIN
+    FBXSDK_NEW_API
+    UNICODE
+    _UNICODE
+    _WINDOWS
+    _USRDLL
+    AUTOMATIONEXPORTEXAMPLE_EXPORTS
 )

@@ -4,7 +4,7 @@ void setup_fbx(char *name) {
     return new fbxMenager;
 }
 
-void fbxMenager::SaveMeshsFBX(const AuCarExpArray<AuCarExpMesh*>& meshes, const wchar_t* name) {
+void fbxMenager::addMhaseNode(const AuCarExpArray<AuCarExpMesh*>& meshes, const wchar_t* name) {
     
 }
 

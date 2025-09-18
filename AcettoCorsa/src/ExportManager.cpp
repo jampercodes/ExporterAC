@@ -30,6 +30,13 @@ AuExpManager::AuExpManager()
 
 AuCarExpErrorCode AuExpManager::Init(const AuCarExpCarData* carData)
 {
+
+	M_boolDataCount = carData->GetBoolDataCount();
+
+	for(i = 0; i < M_boolDataCount; i++)
+	{
+			M_boolData = carData->GetBoolData(i);
+	}
 	
 	GetExportDirectory(m_ExportDirectory);
 
@@ -108,6 +115,12 @@ void AuExpManager::SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name)
 		return;
 	}
 
+	// export to fbx if checkt in menu
+	if (M_boolData[0].Value == true) 
+	{
+		return;
+	} 
+
 	std::wstring filename = m_ExportDirectory + L"\\";
 	filename += name;
 
@@ -131,18 +144,6 @@ void AuExpManager::SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name)
 	AuExpMesh::SaveMeshFile(mesh, filename.c_str());
 }
 
-void AuExpManager::SaveMeshFBX(const AuCarExpArray<AuCarExpMesh*>& meshes, const wchar_t* name)  
-{  
-   if (meshes.GetCount() == 0)  
-   {  
-       return;  
-   }  
-
-   // Create a non-const copy of the meshes array to pass to SaveMeshsFile  
-   AuCarExpArray<AuCarExpMesh*> nonConstMeshes(const_cast<AuCarExpMesh**>(meshes.GetData()), meshes.GetCount());  
-
-   M_fbx::SaveMeshsFBX(nonConstMeshes, nonConstMeshes.GetCount(), filename.c_str());  
-}
 
 AuCarExpErrorCode AuExpManager::GetExportDirectory(std::wstring& ExportDirectory) const
 {

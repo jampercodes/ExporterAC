@@ -24,11 +24,14 @@ public:
 	void SaveImages();
 
 	void SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name);
-	void SaveMeshFBX(const AuCarExpMesh* mesh, const wchar_t* name);
 
 	AuCarExpErrorCode GetExportDirectory(std::wstring& ExportDirectory) const;
 
 	std::wstring m_ExportDirectory;
+
+	inline const AuCarExpUIBoolData* M_boolData = nullptr;
+	inline unsigned int M_boolDataCount = 0;
+
 private:
 
 	AuExpManager();
