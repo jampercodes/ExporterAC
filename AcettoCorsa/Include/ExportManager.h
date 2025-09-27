@@ -28,10 +28,6 @@ public:
 	AuCarExpErrorCode GetExportDirectory(std::wstring& ExportDirectory) const;
 
 	std::wstring m_ExportDirectory;
-
-	inline const AuCarExpUIBoolData* M_boolData = nullptr;
-	inline unsigned int M_boolDataCount = 0;
-
 private:
 
 	AuExpManager();
@@ -44,4 +40,4 @@ private:
 	std::map<std::wstring, int> m_MeshNameCounts;
 };
 
-
+const AuCarExpCarData* M_carData = nullptr;

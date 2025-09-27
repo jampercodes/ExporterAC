@@ -31,13 +31,8 @@ AuExpManager::AuExpManager()
 AuCarExpErrorCode AuExpManager::Init(const AuCarExpCarData* carData)
 {
 
-	M_boolDataCount = carData->GetBoolDataCount();
+	M_carData = carData;
 
-	for(i = 0; i < M_boolDataCount; i++)
-	{
-			M_boolData = carData->GetBoolData(i);
-	}
-	
 	GetExportDirectory(m_ExportDirectory);
 
 	m_ExportDirectory += L"\\";
@@ -115,11 +110,9 @@ void AuExpManager::SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name)
 		return;
 	}
 
-	// export to fbx if checkt in menu
-	if (M_boolData[0].Value == true) 
-	{
-		return;
-	} 
+	if (M_carData->GetBoolData(0)->Value == true) {
+		
+	}
 
 	std::wstring filename = m_ExportDirectory + L"\\";
 	filename += name;
@@ -143,7 +136,6 @@ void AuExpManager::SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name)
 
 	AuExpMesh::SaveMeshFile(mesh, filename.c_str());
 }
-
 
 AuCarExpErrorCode AuExpManager::GetExportDirectory(std::wstring& ExportDirectory) const
 {
