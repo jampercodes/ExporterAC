@@ -112,6 +112,7 @@ void AuExpManager::SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name)
 
 	if (M_carData->GetBoolData(0)->Value == true) {
 		
+		return;
 	}
 
 	std::wstring filename = m_ExportDirectory + L"\\";
