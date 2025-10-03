@@ -1,10 +1,21 @@
 #include <stdio.h>
-#include <stdio.h>
+
+struct fbx_property {
+    char type[4];
+    void* data;
+};
 
 class fbx_node {
+public:
+    fbx_node(char *name);
+    
 private:
     char* node_name;
 
+    unsigned int property_count;
+    fbx_property* properties;
+
+    unsigned int chiled_node_count;
     fbx_node* chiled_nodes;
 };
 
@@ -21,3 +32,6 @@ private:
 
 
 const unsigned int FBX_VERSION = 6000;
+
+
+fbx_node root_node;
