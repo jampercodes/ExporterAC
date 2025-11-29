@@ -40,4 +40,4 @@ private:
 	std::map<std::wstring, int> m_MeshNameCounts;
 };
 
-const AuCarExpCarData* M_carData = nullptr;
+
