@@ -4,6 +4,7 @@
 ************************************************** */
 
 #include "stdafx.h"
+#include "fbx.h"
 #include <Shlobj.h>
 
 bool export_fbx;
@@ -33,6 +34,8 @@ AuCarExpErrorCode AuExpManager::Init(const AuCarExpCarData* carData)
 {
 
 	export_fbx = carData->GetBoolData(0);
+
+	init_fbx();
 
 	GetExportDirectory(m_ExportDirectory);
 
@@ -110,9 +113,10 @@ void AuExpManager::SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name)
 	{
 		return;
 	}
-	
+
 	if (export_fbx)
 	{
+		add_mesh(mesh, name);
 		return;
 	}
 
@@ -154,6 +158,6 @@ AuCarExpErrorCode AuExpManager::GetExportDirectory(std::wstring& ExportDirectory
 	{
 		return AuCarExpErrorCode_CouldNotObtainOutputPathFatal;
 	}
-	
+
 	return AuCarExpErrorCode_Success;
 }

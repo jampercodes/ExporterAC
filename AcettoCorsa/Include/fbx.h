@@ -1,8 +1,8 @@
 #pragma once
 
 #include "fbxsdk.h"
+#include "AutomationExportExample.h"
 
-FbxManager* lSdkManager;
-FbxIOSettings* ios;
-FbxScene* lScene;
-FbxNode* lRootNode;
+void init_fbx();
+void add_mesh (const AuCarExpMesh* mesh, const wchar_t* Wname);
+void save_FBX (std::wstring ExportDirectory);

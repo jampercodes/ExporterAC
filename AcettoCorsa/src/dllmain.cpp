@@ -7,6 +7,7 @@
 #include "stdafx.h"
 
 #include "..\Include\AuCarExportDLL.h"
+#include "..\include\fbx.h"
 
 
 
@@ -148,7 +149,7 @@ AuCarExpErrorCode AuCarExportDLL::GetRequiredBoolData(AuCarExpArray<AuCarExpUIBo
 	}
 
 	//set the value:
-	wcscpy_s(boolData[0].Label, L"fbx?");//label
+	wcscpy_s(boolData[0].Label, L"export to fbx");//label
 	boolData[0].Value = true;//default value
 
 	return AuCarExpErrorCode_Success;
@@ -195,10 +196,15 @@ AuCarExpErrorCode AuCarExportDLL::IsExportInProgress(bool* retInProgress)
 //All outstanding plugin-allocated memory should be cleaned up here
 AuCarExpErrorCode AuCarExportDLL::FreeAllData()
 {
-	//de-allocate everything:
-	AuExpManager::DestroyInstance();
+    //save and free FBX menger shit
+	std::wstring ExportDirectory;
+	AuExpManager::Instance()->GetExportDirectory(ExportDirectory);
+	save_FBX(ExportDirectory);
 
-	return AuCarExpErrorCode_Success;
+    //de-allocate everything:
+    AuExpManager::DestroyInstance();
+
+    return AuCarExpErrorCode_Success;
 }
 
 
