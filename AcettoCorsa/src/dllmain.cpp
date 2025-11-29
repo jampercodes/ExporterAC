@@ -93,7 +93,7 @@ AuCarExpErrorCode AuCarExportDLL::GetExportDirectory(AuCarExpArray<wchar_t>& ret
 	const AuCarExpErrorCode status = AuExpManager::Instance()->GetExportDirectory(ExportDirectory);
 
 	wcscpy_s(retDir.GetData(), retDir.GetCount(), ExportDirectory.c_str());
-	
+
 
 	return status;
 }

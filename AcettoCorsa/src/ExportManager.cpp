@@ -6,6 +6,7 @@
 #include "stdafx.h"
 #include <Shlobj.h>
 
+bool export_fbx;
 
 size_t FindDirDelimiter(std::wstring dir, size_t start)
 {
@@ -31,7 +32,7 @@ AuExpManager::AuExpManager()
 AuCarExpErrorCode AuExpManager::Init(const AuCarExpCarData* carData)
 {
 
-	M_carData = carData;
+	export_fbx = carData->GetBoolData(0);
 
 	GetExportDirectory(m_ExportDirectory);
 
@@ -109,9 +110,9 @@ void AuExpManager::SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name)
 	{
 		return;
 	}
-
-	if (M_carData->GetBoolData(0)->Value == true) {
-		
+	
+	if (export_fbx)
+	{
 		return;
 	}
 
