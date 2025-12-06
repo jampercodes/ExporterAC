@@ -197,9 +197,7 @@ AuCarExpErrorCode AuCarExportDLL::IsExportInProgress(bool* retInProgress)
 AuCarExpErrorCode AuCarExportDLL::FreeAllData()
 {
     //save and free FBX menger shit
-	std::wstring ExportDirectory;
-	AuExpManager::Instance()->GetExportDirectory(ExportDirectory);
-	save_FBX(ExportDirectory);
+	save_FBX();
 
     //de-allocate everything:
     AuExpManager::DestroyInstance();

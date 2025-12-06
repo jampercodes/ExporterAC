@@ -7,8 +7,21 @@ FbxIOSettings* ios;
 FbxScene* lScene;
 FbxNode* lRootNode;
 
-void init_fbx()
+std::string lFilename;
+
+void init_fbx(std::wstring ExportDirectory)
 {
+
+    // build wide path and convert to UTF-8 string
+    std::wstring wpath = ExportDirectory + L"\\body.fbx";
+    int sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, wpath.c_str(), -1, nullptr, 0, nullptr, nullptr);
+
+    if (sizeNeeded > 0) {
+        lFilename.resize(sizeNeeded); // includes null terminator
+        WideCharToMultiByte(CP_UTF8, 0, wpath.c_str(), -1, &lFilename[0], sizeNeeded, nullptr, nullptr);
+        if (!lFilename.empty() && lFilename.back() == '\0') lFilename.pop_back();
+    }
+
     lSdkManager = FbxManager::Create();
 
     ios = FbxIOSettings::Create(lSdkManager, IOSROOT);
@@ -40,20 +53,9 @@ void add_mesh (const AuCarExpMesh* mesh, const wchar_t* Wname)
 
 }
 
-void save_FBX (std::wstring ExportDirectory)
+void save_FBX ()
 {
     FbxExporter* lExporter = FbxExporter::Create(lSdkManager, "");
-
-    // build wide path and convert to UTF-8 string
-    std::wstring wpath = ExportDirectory + L"\\body.fbx";
-    int sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, wpath.c_str(), -1, nullptr, 0, nullptr, nullptr);
-
-    std::string lFilename;
-    if (sizeNeeded > 0) {
-        lFilename.resize(sizeNeeded); // includes null terminator
-        WideCharToMultiByte(CP_UTF8, 0, wpath.c_str(), -1, &lFilename[0], sizeNeeded, nullptr, nullptr);
-        if (!lFilename.empty() && lFilename.back() == '\0') lFilename.pop_back();
-    }
 
     bool lExportStatus = lExporter->Initialize(lFilename.c_str(), -1, lSdkManager->GetIOSettings());
 
@@ -61,6 +63,8 @@ void save_FBX (std::wstring ExportDirectory)
         //print err
         return;
     }
+
+    lExporter->Export(lScene);
 
     lSdkManager->Destroy();
 }

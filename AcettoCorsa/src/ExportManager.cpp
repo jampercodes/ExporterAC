@@ -35,12 +35,14 @@ AuCarExpErrorCode AuExpManager::Init(const AuCarExpCarData* carData)
 
 	export_fbx = carData->GetBoolData(0);
 
-	init_fbx();
+
 
 	GetExportDirectory(m_ExportDirectory);
 
 	m_ExportDirectory += L"\\";
 	m_ExportDirectory += carData->GetCarName();//TODO: sanitise filename
+
+	init_fbx(m_ExportDirectory);
 
 	//ensure target directory exists:
 	DWORD att = GetFileAttributes(m_ExportDirectory.c_str());
