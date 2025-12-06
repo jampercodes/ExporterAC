@@ -42,15 +42,46 @@ void add_mesh (const AuCarExpMesh* mesh, const wchar_t* Wname)
         if (!name.empty() && name.back() == '\0') name.pop_back(); // optional: remove trailing null
     }
 
-    FbxNode* lNode = FbxNode::Create(lScene, name.c_str());
-
     FbxMesh* lMesh = FbxMesh::Create(lScene, name.c_str());
-    lNode->AddNodeAttribute(lMesh);
-
-    lRootNode->AddChild(lNode);
+    
 
     //loding model
 
+    lMesh->InitControlPoints(mesh->GetVertexCount());
+    AuCarExpVertex* vertexBuffer = mesh->GetVertexBuffer();
+
+    for (int i = 0; i < mesh->GetVertexCount(); i++)
+    {
+        lMesh->SetControlPointAt(FbxVector4(vertexBuffer[i].Position.x, vertexBuffer[i].Position.y, vertexBuffer[i].Position.z), i);
+    }
+
+
+    //triangles:
+	unsigned int indexBufferCount = mesh->GetIndexBufferCount();
+
+	for (unsigned int i = 0; i < indexBufferCount; i++)
+	{
+		unsigned int indexCount = mesh->GetIndexCount(i);
+		int* indexBuffer = mesh->GetIndexBuffer(i);
+		for (unsigned int j = 0; j < indexCount; j += 3)
+		{
+            int index0 = indexBuffer[j];
+			int index1 = indexBuffer[j + 1];
+			int index2 = indexBuffer[j + 2];
+
+
+            lMesh->BeginPolygon();
+			lMesh->AddPolygon(index0);
+			lMesh->AddPolygon(index1);
+			lMesh->AddPolygon(index2);
+            lMesh->EndPolygon();
+		}
+	}
+    
+    FbxNode* lNode = FbxNode::Create(lScene, name.c_str());
+    lNode->AddNodeAttribute(lMesh);
+
+    lRootNode->AddChild(lNode);
 }
 
 void save_FBX ()

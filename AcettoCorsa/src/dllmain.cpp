@@ -166,7 +166,6 @@ AuCarExpErrorCode AuCarExportDLL::BeginExport(const AuCarExpCarData* carData, Au
 	AuExpManager::Instance()->GetExportDirectory(ExportDirectory);
 
 	wcscpy_s(retDir.GetData(), retDir.GetCount(), ExportDirectory.c_str());
-	
 
 	//set the flags to none:
 	*retFlags = AuCarExpExporterFlags_None;
