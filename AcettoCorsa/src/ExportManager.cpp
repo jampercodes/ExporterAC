@@ -33,7 +33,7 @@ AuExpManager::AuExpManager()
 AuCarExpErrorCode AuExpManager::Init(const AuCarExpCarData* carData)
 {
 
-	export_fbx = carData->GetBoolData(0);
+	export_fbx = carData->GetBoolData(0)->Value;
 
 
 
