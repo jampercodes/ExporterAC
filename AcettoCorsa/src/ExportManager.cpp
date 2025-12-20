@@ -4,8 +4,10 @@
 ************************************************** */
 
 #include "stdafx.h"
+#include "fbx.h"
 #include <Shlobj.h>
 
+bool export_fbx;
 
 size_t FindDirDelimiter(std::wstring dir, size_t start)
 {
@@ -31,17 +33,16 @@ AuExpManager::AuExpManager()
 AuCarExpErrorCode AuExpManager::Init(const AuCarExpCarData* carData)
 {
 
-	M_boolDataCount = carData->GetBoolDataCount();
+	export_fbx = carData->GetBoolData(0)->Value;
 
-	for(i = 0; i < M_boolDataCount; i++)
-	{
-			M_boolData = carData->GetBoolData(i);
-	}
-	
+
+
 	GetExportDirectory(m_ExportDirectory);
 
 	m_ExportDirectory += L"\\";
 	m_ExportDirectory += carData->GetCarName();//TODO: sanitise filename
+
+	init_fbx(m_ExportDirectory);
 
 	//ensure target directory exists:
 	DWORD att = GetFileAttributes(m_ExportDirectory.c_str());
@@ -115,11 +116,11 @@ void AuExpManager::SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name)
 		return;
 	}
 
-	// export to fbx if checkt in menu
-	if (M_boolData[0].Value == true) 
+	if (export_fbx)
 	{
+		add_mesh(mesh, name);
 		return;
-	} 
+	}
 
 	std::wstring filename = m_ExportDirectory + L"\\";
 	filename += name;
@@ -144,7 +145,6 @@ void AuExpManager::SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name)
 	AuExpMesh::SaveMeshFile(mesh, filename.c_str());
 }
 
-
 AuCarExpErrorCode AuExpManager::GetExportDirectory(std::wstring& ExportDirectory) const
 {
 	TCHAR path[MAX_PATH];
@@ -160,6 +160,6 @@ AuCarExpErrorCode AuExpManager::GetExportDirectory(std::wstring& ExportDirectory
 	{
 		return AuCarExpErrorCode_CouldNotObtainOutputPathFatal;
 	}
-	
+
 	return AuCarExpErrorCode_Success;
 }
