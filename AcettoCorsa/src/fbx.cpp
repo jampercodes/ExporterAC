@@ -43,7 +43,6 @@ void add_mesh (const AuCarExpMesh* mesh, const wchar_t* Wname)
     }
 
     FbxMesh* lMesh = FbxMesh::Create(lScene, name.c_str());
-    
 
     //loding model
 
@@ -77,11 +76,23 @@ void add_mesh (const AuCarExpMesh* mesh, const wchar_t* Wname)
             lMesh->EndPolygon();
 		}
 	}
-    
+
     FbxNode* lNode = FbxNode::Create(lScene, name.c_str());
     lNode->AddNodeAttribute(lMesh);
 
     lRootNode->AddChild(lNode);
+
+    auto Ttransform = mesh->GetTransform();
+    auto TRotationEulerDegrees = mesh->GetRotationEulerDegrees();
+    auto Tscale = mesh->GetScale();
+
+    FbxDouble3 OldTransform = lNode->LclTranslation.Get();
+
+    lNode->LclTranslation.Set(FbxDouble3 (Ttransform[12], Ttransform[13], Ttransform[14]));
+
+    lNode->LclScaling.Set(FbxDouble3 (Tscale.value[0], Tscale.value[1], Tscale.value[2]));
+
+    lNode->LclRotation.Set(FbxDouble3 (TRotationEulerDegrees.x, TRotationEulerDegrees.y, TRotationEulerDegrees.z));
 }
 
 void save_FBX ()
