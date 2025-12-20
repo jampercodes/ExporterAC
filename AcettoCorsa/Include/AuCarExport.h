@@ -583,7 +583,7 @@ struct std::hash<AuCarExpVector2>
 	std::size_t operator()(const AuCarExpVector2& vector) const
 	{
 		size_t outHash = 0;
-//#if PLATFORM_WINDOWS	 || defined(_WINDOWS)	
+//#if PLATFORM_WINDOWS	 || defined(_WINDOWS)
 		outHash = std::hash<float>()(vector.x);
 		outHash ^= std::hash<float>()(vector.y) << 1;
 //#endif

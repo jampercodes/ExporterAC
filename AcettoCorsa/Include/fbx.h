@@ -1,21 +1,8 @@
-#include <unordered_map>
-#include <string>
+#pragma once
 
-fbxMenager setup_fbx(std::string);
+#include "fbxsdk.h"
+#include "AutomationExportExample.h"
 
-enum part_type
-{
-    Chassi,
-    wheel,
-    engene,
-    exhaust,
-    fixture
-};
-
-class fbxMenager
-{
-public:
-    void SaveMeshsFBX(AuCarExpArray<AuCarExpMesh*>& meshes, int mesh_count, const wchar_t* filename);
-
-    void save_fbx();
-};
+void init_fbx(std::wstring ExportDirectory);
+void add_mesh (const AuCarExpMesh* mesh, const wchar_t* Wname);
+void save_FBX ();

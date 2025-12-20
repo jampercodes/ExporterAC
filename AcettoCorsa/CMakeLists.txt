@@ -14,7 +14,7 @@ if(NOT DEFINED LIB_TYPE)
 endif()
 
 message(STATUS "Target pointer size: ${CMAKE_SIZEOF_VOID_P}")
-if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+if(CMAKE_SIZEOF_VOID_P EQUAL 4)
     message(STATUS "Building for x86")
     set(target_architecture "x86")
 else()
@@ -31,6 +31,8 @@ add_library(${BASE_NAME} ${LIB_TYPE} ${src_files})
 target_include_directories(${BASE_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/Include)
 
 target_include_directories(${BASE_NAME} PRIVATE lib_include)
+
+#target_link_libraries(${BASE_NAME} PRIVATE  ${CMAKE_SOURCE_DIR}/lib/FbxSdk/${target_architecture}/debug/libfbxsdk.dll)
 
 #target_compile_definitions(${BASE_NAME} PRIVATE FBXSDK_ENV_WIN FBXSDK_COMPILER_MSC FBXSDK_NEW_API)
 
@@ -58,4 +60,24 @@ target_compile_definitions(${BASE_NAME} PRIVATE
     _WINDOWS
     _USRDLL
     AUTOMATIONEXPORTEXAMPLE_EXPORTS
+)
+
+# --- FBX import libraries (do NOT link the .dll) ---
+set(FBX_ROOT "${CMAKE_SOURCE_DIR}/lib/FbxSdk/${target_architecture}")
+
+# common candidate names/paths (adjust names if different)
+set(FBX_LIB_DEBUG  "${FBX_ROOT}/debug/libfbxsdk.lib")
+set(FBX_LIB_RELEASE "${FBX_ROOT}/release/libfbxsdk.lib")
+#set(FBX_LIB_RELEASE_ALT "${FBX_ROOT}/libfbxsdk.lib")  # fallback "$<$<CONFIG:Release>:${FBX_LIB_RELEASE_ALT}>"
+
+# prefer explicit per-config linking using generator expressions
+target_link_libraries(${BASE_NAME} PRIVATE
+    "$<$<CONFIG:Debug>:${FBX_LIB_DEBUG}>"
+    "$<$<CONFIG:Release>:${FBX_LIB_RELEASE}>"
+)
+
+# add FBX includes too (optional but recommended)
+target_include_directories(${BASE_NAME} PRIVATE
+    ${CMAKE_SOURCE_DIR}/Include
+    "${FBX_ROOT}/include"
 )
