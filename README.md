@@ -5,7 +5,7 @@
 > Please make an issue if you encounter bugs.
 
 ## build process
-You need to have Python and Visual Studio 17 2022 C++ compiler, and a Python interpreter installed
+You need to have Python and Visual Studio 17 2022 C++ compiler installed
 
 Run build.py
 
