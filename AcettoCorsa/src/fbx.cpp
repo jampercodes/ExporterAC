@@ -30,10 +30,12 @@ void init_fbx(std::wstring ExportDirectory)
     lScene = FbxScene::Create(lSdkManager,"car");
 
     lRootNode = lScene->GetRootNode();
+
 }
 
 void add_mesh (const AuCarExpMesh* mesh, const wchar_t* Wname)
 {
+
     int sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, Wname, -1, nullptr, 0, nullptr, nullptr);
     std::string name;
     if (sizeNeeded > 0) {
@@ -42,9 +44,22 @@ void add_mesh (const AuCarExpMesh* mesh, const wchar_t* Wname)
         if (!name.empty() && name.back() == '\0') name.pop_back(); // optional: remove trailing null
     }
 
-    FbxMesh* lMesh = FbxMesh::Create(lScene, name.c_str());
+    //save textures:
+	for (unsigned int i = 0; i < mesh->GetIndexBufferCount(); i++)
+	{
+		AuExpManager::Instance()->AddImage(mesh->GetMaterial(i)->GetDiffuseMapData().Texture);
+		AuExpManager::Instance()->AddImage(mesh->GetMaterial(i)->GetNormalMapData().Texture);
+	}
 
-    //loding model
+
+
+    //make textures
+    FbxSurfacePhong *lMaterial = FbxSurfacePhong::Create(lScene, FbxString(name.c_str()));
+    lMaterial->Diffuse.Set(FbxDouble3 (1, 1, 1));
+
+
+    //save mesh
+    FbxMesh* lMesh = FbxMesh::Create(lScene, name.c_str());
 
     lMesh->InitControlPoints(mesh->GetVertexCount());
     AuCarExpVertex* vertexBuffer = mesh->GetVertexBuffer();
@@ -93,6 +108,8 @@ void add_mesh (const AuCarExpMesh* mesh, const wchar_t* Wname)
     lNode->LclScaling.Set(FbxDouble3 (Tscale.value[0], Tscale.value[1], Tscale.value[2]));
 
     lNode->LclRotation.Set(FbxDouble3 (TRotationEulerDegrees.x, TRotationEulerDegrees.y, TRotationEulerDegrees.z));
+
+    lNode->AddMaterial(lMaterial);
 }
 
 void save_FBX ()
@@ -105,6 +122,10 @@ void save_FBX ()
         //print err
         return;
     }
+
+    lExporter->SetFileExportVersion(
+        FBX_2014_00_COMPATIBLE,
+        FbxSceneRenamer::eNone );
 
     lExporter->Export(lScene);
 
