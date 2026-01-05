@@ -109,6 +109,20 @@ void AuExpManager::SaveImages()
 	}
 }
 
+void AuExpManager::SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name, SpecialMesh specialmesh)
+{
+	if (!mesh)
+	{
+		return;
+	}
+
+	if (export_fbx)
+	{
+		add_mesh(mesh, name, specialmesh);
+		return;
+	}
+}
+
 void AuExpManager::SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name)
 {
 	if (!mesh)

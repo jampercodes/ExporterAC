@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include "fbx.h"
 #include "AutomationExportExample.h"
 
 class AuExpManager
@@ -23,7 +24,9 @@ public:
 	void AddImage(const AuCarExpTexture* texture);
 	void SaveImages();
 
+	void SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name, SpecialMesh specialmesh);
 	void SaveMesh(const AuCarExpMesh* mesh, const wchar_t* name);
+
 
 	AuCarExpErrorCode GetExportDirectory(std::wstring& ExportDirectory) const;
 
