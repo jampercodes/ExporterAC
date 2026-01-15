@@ -29,7 +29,8 @@ Copy those 4 files to: \
 
 - [x] exporting the mesh
 - [ ] adding the uv´s normol maps to make it export in to ks editor  
-- [ ] fixing the rotation on some objects  
+- [ ] fixing the rotation on some objects
+- [ ] adding eptys for wheel's and more if needid
 
 </details>
 
