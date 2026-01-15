@@ -19,10 +19,7 @@ Copy those 4 files to: \
 [your_steam_lib]\Automation\UE427\AutomationGame\Content\ExportPlugins
 
 ## to do
-<details open>
- <summary> </summary>
-
- <details>
+<details>
 
 <summary> export fbx</summary>
 
@@ -44,4 +41,4 @@ Copy those 4 files to: \
 
 > priority: low (wil use hardcoded values for now)
 
- </details>
+</details>
