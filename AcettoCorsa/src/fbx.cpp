@@ -117,8 +117,10 @@ void add_mesh (const AuCarExpMesh* mesh, const wchar_t* Wname, FbxDouble3 extraO
 void add_tire_mesh (const AuCarExpMesh* mesh, const wchar_t* Wname)
 { // clone the wheel to the other side, add a empty for ac
 
+    // add empty first
     add_mesh(mesh, Wname);
 
+    // add a  nother empty 
     add_mesh(mesh, Wname, FbxDouble3(-1, 1, 1));
 }
 
@@ -177,6 +179,9 @@ void add_mesh (const AuCarExpMesh* mesh, const wchar_t* Wname, SpecialMesh speci
             break;
         case suspension:
             add_suspension_mesh(mesh, Wname);
+            break;
+        default:
+            add_mesh(mesh, Wname, FbxDouble3(1,1,1)); // shudnt be used
             break;
     }
 }

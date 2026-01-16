@@ -19,6 +19,7 @@ Copy those 4 files to: \
 [your_steam_lib]\Automation\UE427\AutomationGame\Content\ExportPlugins
 
 ## to do
+
 <details>
 
 <summary> export fbx</summary>
@@ -28,6 +29,7 @@ Copy those 4 files to: \
 > priority: high (working on it now)
 
 - [x] exporting the mesh
+- [ ] restructer add mesh funck's
 - [ ] adding the uv´s normol maps to make it export in to ks editor  
 - [ ] fixing the rotation on some objects
 - [ ] adding eptys for wheel's and more if needid
